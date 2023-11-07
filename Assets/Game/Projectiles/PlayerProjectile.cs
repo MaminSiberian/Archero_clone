@@ -1,7 +1,7 @@
 using Enemies;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider))]
 public class PlayerProjectile : MonoBehaviour
 {
     private Rigidbody rb;

@@ -3,11 +3,12 @@ using UnityEngine;
 
 namespace Enemies
 {
-    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider))]
     public abstract class EnemyBase : MonoBehaviour
     {
         [SerializeField] protected float moveSpeed;
         [SerializeField] protected int maxHP;
+        [SerializeField] protected float damage = 1;
 
         public static event Action<EnemyBase> OnEnemySpawnedEvent;
         public static event Action<EnemyBase> OnEnemyDeathEvent;
@@ -15,15 +16,27 @@ namespace Enemies
         protected float currentHP;
         protected PlayerController player;
         protected Rigidbody rb;
+        protected Collider coll;
+
+        protected const int wallsLayerNumber = 6;
 
         protected virtual void Awake()
         {
             currentHP = maxHP;
             rb = GetComponent<Rigidbody>();
+            coll = GetComponent<Collider>();
         }
         protected virtual void Start()
         {            
             player = FindObjectOfType<PlayerController>();
+        }
+        private void OnCollisionEnter(Collision collision)
+        {
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.GetDamage(damage);
+            }
         }
         public void GetDamage(float value)
         {
