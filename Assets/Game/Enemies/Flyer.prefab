@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
-  maxHP: 4
+  maxHP: 2
   damage: 1
   wallsLayer:
     serializedVersion: 2

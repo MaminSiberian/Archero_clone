@@ -50,6 +50,10 @@ namespace Enemies
         }
         protected void KillEnemy()
         {
+            var coin = PoolManager.GetCoin();
+            coin.gameObject.SetActive(true);
+            coin.transform.position = transform.position;
+
             var de = PoolManager.GetDeathEffect();
             de.gameObject.SetActive(true);
             de.transform.position = transform.position;

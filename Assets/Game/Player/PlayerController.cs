@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Transform shootPos;
     [SerializeField] private LayerMask wallsLayer;
+
+    public static event Action<float> OnPlayerHealthChangedEvent;
     public static event Action OnPlayerDeathEvent;
 
     private Rigidbody rb;
@@ -103,6 +105,7 @@ public class PlayerController : MonoBehaviour
     public void GetDamage(float value)
     {
         currentHP -= value;
+        OnPlayerHealthChangedEvent?.Invoke(currentHP);
 
         if (currentHP <= 0)
         {
