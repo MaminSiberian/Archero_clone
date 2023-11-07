@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Enemies;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
-[RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(PlayerModel))]
+[RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider)), RequireComponent(typeof(PlayerModel))]
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private Transform shootPos;
     [SerializeField] private LayerMask wallsLayer;
     public static event Action OnPlayerDeathEvent;
 
     private Rigidbody rb;
+    private Collider coll;
     private PlayerModel model;
     private InputManager input;
 
@@ -21,11 +22,16 @@ public class PlayerController : MonoBehaviour
     private Transform target;
     private const int wallsLayerNumber = 6;
 
+    private float timer = 0f;
+    private bool readyToFire;
+
     #region monobehs
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        coll = GetComponent<Collider>();
         model = GetComponent<PlayerModel>();
+        currentHP = model.maxHP;
     }
     private void OnEnable()
     {
@@ -44,6 +50,9 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         inputSpeed = input.speed;
+        if (!readyToFire) Reload();
+
+        if (readyToFire && target != null) Shoot();
     }
     private void FixedUpdate()
     {
@@ -54,19 +63,58 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        rb.velocity = new Vector3(inputSpeed.x, 0f, inputSpeed.y) * model.speed * 100 * Time.fixedDeltaTime;
+        rb.velocity = new Vector3(inputSpeed.x, 0f, inputSpeed.y) * model.moveSpeed * 100 * Time.fixedDeltaTime;
     }
     private void Rotate()
     {
-        if (Mathf.Abs(inputSpeed.x) <= 0.2f & Mathf.Abs(inputSpeed.y) <= 0.2f)
+        if (Mathf.Abs(inputSpeed.x) <= 0.2f && Mathf.Abs(inputSpeed.y) <= 0.2f)
         {
             LookForEnemies();
             transform.LookAt(target);
         }
         else
         {
+            target = null;
             transform.LookAt(transform.position + new Vector3(inputSpeed.x, 0f, inputSpeed.y));
         }
+    }
+    private void Shoot()
+    {
+        if (target == null) return;
+
+        var proj = ProjectilePool.GetPlayerProjectile();
+        Physics.IgnoreCollision(coll, proj.GetComponent<Collider>());
+        proj.gameObject.SetActive(true);
+        proj.transform.position = shootPos.position;
+        proj.Initialize(target, model.projSpeed, 1);
+
+        readyToFire = false;
+    }
+    private void Reload()
+    {
+        if (timer >= model.reloadTime)
+        {
+            timer -= model.reloadTime;
+            readyToFire = true;
+        }
+        else
+            timer += Time.deltaTime;
+    }
+
+    public void GetDamage(float value)
+    {
+        currentHP -= value;
+
+        if (currentHP <= 0)
+        {
+            currentHP = model.maxHP;
+            KillPlayer();
+        }
+    }
+    private void KillPlayer()
+    {
+        OnPlayerDeathEvent?.Invoke();
+        gameObject.SetActive(false);
     }
 
     #region enemies

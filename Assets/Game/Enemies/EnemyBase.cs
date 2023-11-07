@@ -25,7 +25,7 @@ namespace Enemies
         {            
             player = FindObjectOfType<PlayerController>();
         }
-        public void GetDamage(int value)
+        public void GetDamage(float value)
         {
             currentHP -= value;
 
