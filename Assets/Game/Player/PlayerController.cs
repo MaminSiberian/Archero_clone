@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
     {
         if (target == null) return;
 
-        var proj = ProjectilePool.GetPlayerProjectile();
+        var proj = PoolManager.GetPlayerProjectile();
         Physics.IgnoreCollision(coll, proj.GetComponent<Collider>());
         proj.gameObject.SetActive(true);
         proj.transform.position = shootPos.position;

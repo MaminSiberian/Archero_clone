@@ -65,7 +65,7 @@ namespace Enemies
         }
         private void Shoot()
         {
-            var proj = ProjectilePool.GetEnemyProjectile();
+            var proj = PoolManager.GetEnemyProjectile();
             Physics.IgnoreCollision(coll, proj.GetComponent<Collider>());
             proj.gameObject.SetActive(true);
             proj.transform.position = shootPos.position;

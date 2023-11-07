@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1901016900979004266}
   - component: {fileID: 1901016900979004245}
   m_Layer: 0
-  m_Name: ProjectilePool
+  m_Name: PoolManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

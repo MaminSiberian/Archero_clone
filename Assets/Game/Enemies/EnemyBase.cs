@@ -50,7 +50,10 @@ namespace Enemies
         }
         protected void KillEnemy()
         {
-            // death effect
+            var de = PoolManager.GetDeathEffect();
+            de.gameObject.SetActive(true);
+            de.transform.position = transform.position;
+
             Deactivate();
         }
         protected void Deactivate()
