@@ -67,10 +67,9 @@ public class PlayerController : MonoBehaviour
     }
     private void Rotate()
     {
-        if (Mathf.Abs(inputSpeed.x) <= 0.2f && Mathf.Abs(inputSpeed.y) <= 0.2f)
+        if (Mathf.Abs(inputSpeed.x) <= 0.2f && Mathf.Abs(inputSpeed.y) <= 0.2f && enemiesOnLevel.Count > 0)
         {
             LookForEnemies();
-            transform.LookAt(target);
         }
         else
         {
@@ -86,7 +85,7 @@ public class PlayerController : MonoBehaviour
         Physics.IgnoreCollision(coll, proj.GetComponent<Collider>());
         proj.gameObject.SetActive(true);
         proj.transform.position = shootPos.position;
-        proj.Initialize(target, model.projSpeed, 1);
+        proj.Initialize(target, model.projSpeed, model.damage);
 
         readyToFire = false;
     }
@@ -130,6 +129,7 @@ public class PlayerController : MonoBehaviour
             if (EnemyIsVisible(enemy))
             {
                 target = enemy.transform;
+                transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
                 return;
             }
         }

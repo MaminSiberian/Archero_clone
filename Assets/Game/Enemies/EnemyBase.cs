@@ -9,6 +9,7 @@ namespace Enemies
         [SerializeField] protected float moveSpeed;
         [SerializeField] protected int maxHP;
         [SerializeField] protected float damage = 1;
+        [SerializeField] private LayerMask wallsLayer;
 
         public static event Action<EnemyBase> OnEnemySpawnedEvent;
         public static event Action<EnemyBase> OnEnemyDeathEvent;
@@ -65,6 +66,18 @@ namespace Enemies
         protected void OnEnemyDeath(EnemyBase enemy)
         {
             OnEnemyDeathEvent?.Invoke(enemy);
+        }
+        protected bool PlayerIsVisible()
+        {
+            RaycastHit hit;
+            if (Physics.Linecast(transform.position, player.transform.position, out hit, wallsLayer))
+            {
+                if (hit.collider.gameObject.layer == wallsLayerNumber)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

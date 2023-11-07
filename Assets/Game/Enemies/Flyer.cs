@@ -1,20 +1,17 @@
 using UnityEngine;
-using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Enemies
 {
-    [RequireComponent(typeof(NavMeshAgent))]
-    public class Chaser : EnemyBase
+    [RequireComponent(typeof(Rigidbody))]
+    public class Flyer : EnemyBase
     {
+        [SerializeField] private float altitude;
         [SerializeField] private float reloadTime;
         [SerializeField] private float shootingRange;
         [SerializeField] private float force;
 
         [SerializeField] private Transform shootPos;
-        [SerializeField] private LayerMask wallsLayer;
 
-        private NavMeshAgent agent;
         private Vector3 target;
         private bool readyToFire;
         private float timer = 0f;
@@ -22,6 +19,7 @@ namespace Enemies
         protected void OnEnable()
         {
             OnEnemySpawned(this);
+            transform.position = new Vector3(transform.position.x, altitude, transform.position.z);
             target = transform.position;
         }
         protected void OnDisable()
@@ -31,8 +29,7 @@ namespace Enemies
         protected override void Awake()
         {
             base.Awake();
-            agent = GetComponent<NavMeshAgent>();
-            agent.speed = moveSpeed;
+            rb = GetComponent<Rigidbody>();
         }
         protected override void Start()
         {
@@ -41,25 +38,27 @@ namespace Enemies
         }
         private void Update()
         {
-            if (!readyToFire) Reload();
+            if (PlayerIsVisible())
+            {
+                target = new Vector3(player.transform.position.x, altitude, player.transform.position.z);
+                transform.LookAt(target);
+            }
+
+            if (!readyToFire && PlayerIsVisible()) Reload();
 
             if (readyToFire && PlayerIsVisible() && PlayerIsInRange()) Shoot();
         }
         private void FixedUpdate()
         {
-            if (PlayerIsVisible()) target = player.transform.position;
-
             if (PlayerIsInRange() && PlayerIsVisible())
             {
-                agent.isStopped = true;
                 return;
             }
-            agent.isStopped = false;
             Move();
         }
         private void Move()
         {
-            agent.SetDestination(target);
+            rb.MovePosition(transform.position + (target - transform.position).normalized * moveSpeed * Time.fixedDeltaTime);
         }
         private void Shoot()
         {
@@ -67,7 +66,7 @@ namespace Enemies
             Physics.IgnoreCollision(coll, proj.GetComponent<Collider>());
             proj.gameObject.SetActive(true);
             proj.transform.position = shootPos.position;
-            proj.Initialize(target, force, 1);
+            proj.Initialize(player.transform.position, force, damage);
 
             readyToFire = false;
         }
@@ -84,18 +83,6 @@ namespace Enemies
         private bool PlayerIsInRange()
         {
             return Vector3.Distance(transform.position, player.transform.position) <= shootingRange;
-        }
-        private bool PlayerIsVisible()
-        {
-            RaycastHit hit;
-            if (Physics.Linecast(transform.position, player.transform.position, out hit, wallsLayer))
-            {
-                if (hit.collider.gameObject.layer == wallsLayerNumber)
-                {
-                    return false;
-                }
-            }
-            return true;
         }
     }
 }

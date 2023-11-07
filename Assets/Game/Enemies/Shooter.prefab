@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 6994132287982009653}
   - component: {fileID: 6994132287982009657}
   m_Layer: 8
-  m_Name: Chaser
+  m_Name: Shooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -250,13 +250,13 @@ MonoBehaviour:
   moveSpeed: 2
   maxHP: 6
   damage: 1
-  reloadTime: 2
-  shootingRange: 10
-  force: 500
-  shootPos: {fileID: 6192238151719254284}
   wallsLayer:
     serializedVersion: 2
     m_Bits: 64
+  reloadTime: 1.2
+  shootingRange: 15
+  force: 750
+  shootPos: {fileID: 6192238151719254284}
 --- !u!136 &6994132287982009652
 CapsuleCollider:
   m_ObjectHideFlags: 0
