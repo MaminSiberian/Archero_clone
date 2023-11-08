@@ -6,13 +6,17 @@ namespace UI
 {
     public class UIManager : MonoBehaviour
     {
+        [SerializeField] private float startCooldownTime = 3f;
         [SerializeField] private TextMeshProUGUI HPText;
         [SerializeField] private TextMeshProUGUI coinsText;
+        [SerializeField] private TextMeshProUGUI startCooldown;
 
         [SerializeField] private GameObject pauseButton;
         [SerializeField] private GameObject pauseScreen;
         [SerializeField] private GameObject gameOverScreen;
         [SerializeField] private GameObject levelPassedScreen;
+
+        private float timer = 0;
 
         #region monobehs
         private void OnEnable()
@@ -34,6 +38,11 @@ namespace UI
             Time.timeScale = 1f;
             HPText.text = "HP: " + FindObjectOfType<PlayerModel>().maxHP;
             coinsText.text = "Coins: " + 0;
+            timer = startCooldownTime;
+        }
+        private void Update()
+        {
+            if (timer > 0) TickCooldown();
         }
         #endregion
 
@@ -66,6 +75,21 @@ namespace UI
         private void OnCoinsValueChanged(int value)
         {
             coinsText.text = "Coins: " + value;
+        }
+        private void TickCooldown()
+        {
+            if (timer <= 0.1)
+            {
+                Time.timeScale = 1f;
+                startCooldown.enabled = false;
+            }
+            else
+            {
+                Time.timeScale = 0f;
+                timer -= Time.unscaledDeltaTime;
+                startCooldown.enabled = true;
+                startCooldown.text = "Wait... " + (int)timer;
+            }
         }
 
         #region pause
