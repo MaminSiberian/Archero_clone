@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1901016900979004244
+--- !u!1 &107857956236445586
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,44 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1901016900979004266}
-  - component: {fileID: 1901016900979004245}
+  - component: {fileID: 107857956236445584}
+  - component: {fileID: 107857956236445587}
   m_Layer: 0
-  m_Name: PoolManager
+  m_Name: InputManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1901016900979004266
+--- !u!4 &107857956236445584
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1901016900979004244}
+  m_GameObject: {fileID: 107857956236445586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6524649, y: 0.38511133, z: -9.081116}
+  m_LocalPosition: {x: -1.4546216, y: -1.0400188, z: -11.341641}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1901016900979004245
+--- !u!114 &107857956236445587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1901016900979004244}
+  m_GameObject: {fileID: 107857956236445586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb26094bf817cdb43939c7e26ec9a31c, type: 3}
+  m_Script: {fileID: 11500000, guid: dfd0fe7e7ba2e0446ace325990b449d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolCount: 10
-  playerProjPrefab: {fileID: 1308939031408253757, guid: 69a8ca7a4cdfcab48b79c8aa29e7af92, type: 3}
-  enemyProjPrefab: {fileID: 7934555952371062358, guid: bde752c8924167e43b2f203e4a1b662d, type: 3}
-  deathEffectPrefab: {fileID: 5455555222491939884, guid: 65d6afa47c2a06740a4c7e4a6db0e39b, type: 3}
-  coinPrefab: {fileID: 7220728131889555266, guid: 96b9c551870b3af44bf84b59f61dd4f3, type: 3}
+  inputType: 0

@@ -153,6 +153,7 @@ public class PlayerController : MonoBehaviour
     private void AddEnemy(EnemyBase enemy)
     {
         enemiesOnLevel.Add(enemy);
+        enemiesOnLevel = enemiesOnLevel.Distinct().ToList();
     }
     private void RemoveEnemy(EnemyBase enemy)
     {

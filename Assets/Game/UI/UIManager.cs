@@ -42,7 +42,7 @@ namespace UI
         }
         private void Update()
         {
-            if (timer > 0) TickCooldown();
+            if (timer != 0) TickCooldown();
         }
         #endregion
 
@@ -80,8 +80,10 @@ namespace UI
         {
             if (timer <= 0.1)
             {
+                timer = 0f;
                 Time.timeScale = 1f;
                 startCooldown.enabled = false;
+                pauseButton.SetActive(true);
             }
             else
             {
@@ -89,6 +91,7 @@ namespace UI
                 timer -= Time.unscaledDeltaTime;
                 startCooldown.enabled = true;
                 startCooldown.text = "Wait... " + (int)timer;
+                pauseButton.SetActive(false);
             }
         }
 
