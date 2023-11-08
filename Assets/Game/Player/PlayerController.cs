@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     private Collider coll;
     private PlayerModel model;
     private InputManager input;
+    private PlayerManager manager;
 
     private Vector2 inputSpeed;
     private float currentHP;
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     private void Start()
     {
         input = FindObjectOfType<InputManager>();
+        manager = FindObjectOfType<PlayerManager>();
     }
     private void Update()
     {
@@ -84,11 +86,30 @@ public class PlayerController : MonoBehaviour, IDamagable
     {
         if (target == null) return;
 
-        var proj = PoolManager.GetPlayerProjectile();
-        Physics.IgnoreCollision(coll, proj.GetComponent<Collider>());
-        proj.gameObject.SetActive(true);
-        proj.transform.position = shootPos.position;
-        proj.Initialize(target, model.projSpeed, model.damage);
+        switch (manager.weapon)
+        {
+            case Weapon.Pistol:
+                var pistolProj = PoolManager.GetPistolProjectile();
+                Physics.IgnoreCollision(coll, pistolProj.GetComponent<Collider>());
+                pistolProj.gameObject.SetActive(true);
+                pistolProj.transform.position = shootPos.position;
+                pistolProj.Initialize(target, model.projSpeed, model.damage);
+                break;
+            case Weapon.Shotgun:
+                for (int i = 0; i < 5; i++)
+                {
+                    var shotgunProj = PoolManager.GetShotgunProjectile();
+                    Physics.IgnoreCollision(coll, shotgunProj.GetComponent<Collider>());
+                    shotgunProj.gameObject.SetActive(true);
+                    shotgunProj.transform.position = shootPos.position;
+                    shotgunProj.Initialize(target.position, model.projSpeed, model.damage);
+                }
+                break;
+            case Weapon.Basooka:
+                break;
+            default:
+                break;
+        }
 
         readyToFire = false;
     }

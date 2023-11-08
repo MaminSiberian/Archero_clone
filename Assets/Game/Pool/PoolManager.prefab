@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolCount: 10
-  playerProjPrefab: {fileID: 1308939031408253757, guid: 69a8ca7a4cdfcab48b79c8aa29e7af92, type: 3}
+  pistolProjPrefab: {fileID: 1308939031408253757, guid: 69a8ca7a4cdfcab48b79c8aa29e7af92, type: 3}
+  shotgunProjPrefab: {fileID: 8506456813050830463, guid: c80c3928855636e4f8f8340822a5be9a, type: 3}
+  basookaProjPrefab: {fileID: 2334718355308297416, guid: 6b4448fc9693d6c45a1c9c19b5203ab3, type: 3}
   enemyProjPrefab: {fileID: 7934555952371062358, guid: bde752c8924167e43b2f203e4a1b662d, type: 3}
   deathEffectPrefab: {fileID: 5455555222491939884, guid: 65d6afa47c2a06740a4c7e4a6db0e39b, type: 3}
   coinPrefab: {fileID: 7220728131889555266, guid: 96b9c551870b3af44bf84b59f61dd4f3, type: 3}
+  explosionPrefab: {fileID: 6980230150794667407, guid: 69c2f1d8846c4cd44a92b0d51a98b591, type: 3}

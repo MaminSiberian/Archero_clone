@@ -4,13 +4,19 @@ using Enemies;
 public class PoolManager : MonoBehaviour
 {
     [SerializeField] private int poolCount = 10;
-    [SerializeField] private PlayerProjectile playerProjPrefab;
+    [SerializeField] private PistolProjectile pistolProjPrefab;
+    [SerializeField] private ShotgunProjectile shotgunProjPrefab;
+    [SerializeField] private BasookaProjectile basookaProjPrefab;
+
     [SerializeField] private EnemyProjectile enemyProjPrefab;
     [SerializeField] private Destructor deathEffectPrefab;
     [SerializeField] private Coin coinPrefab;
     [SerializeField] private Explosion explosionPrefab;
 
-    private static Pool<PlayerProjectile> playerPool;
+    private static Pool<PistolProjectile> pistolPool;
+    private static Pool<ShotgunProjectile> shotgunPool;
+    private static Pool<BasookaProjectile> basookaPool;
+
     private static Pool<EnemyProjectile> enemyPool;
     private static Pool<Destructor> deathEffectPool;
     private static Pool<Coin> coinPool;
@@ -18,17 +24,29 @@ public class PoolManager : MonoBehaviour
 
     private void Start()
     {
-        playerPool = new Pool<PlayerProjectile>(playerProjPrefab, poolCount, transform);
+        pistolPool = new Pool<PistolProjectile>(pistolProjPrefab, poolCount, transform);
+        shotgunPool = new Pool<ShotgunProjectile>(shotgunProjPrefab, poolCount, transform);
+        basookaPool = new Pool<BasookaProjectile>(basookaProjPrefab, poolCount, transform);
+
         enemyPool = new Pool<EnemyProjectile>(enemyProjPrefab, poolCount, transform);
         deathEffectPool = new Pool<Destructor>(deathEffectPrefab, poolCount, transform);
         coinPool = new Pool<Coin>(coinPrefab, poolCount, transform);
         explosionPool = new Pool<Explosion>(explosionPrefab, poolCount, transform);
     }
 
-    public static PlayerProjectile GetPlayerProjectile()
+    public static PistolProjectile GetPistolProjectile()
     {
-        return playerPool.GetObject();
+        return pistolPool.GetObject();
     }
+    public static ShotgunProjectile GetShotgunProjectile()
+    {
+        return shotgunPool.GetObject();
+    }
+    public static BasookaProjectile GetBasookaProjectile()
+    {
+        return basookaPool.GetObject();
+    }
+
     public static EnemyProjectile GetEnemyProjectile()
     {
         return enemyPool.GetObject();

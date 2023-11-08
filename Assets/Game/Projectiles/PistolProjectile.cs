@@ -2,7 +2,7 @@ using Enemies;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider))]
-public class PlayerProjectile : MonoBehaviour
+public class PistolProjectile : MonoBehaviour
 {
     private Rigidbody rb;
     private Transform target;
