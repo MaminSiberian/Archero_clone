@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour, IDamagable
                 pistolProj.Initialize(target, model.projSpeed, model.damage);
                 break;
             case Weapon.Shotgun:
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     var shotgunProj = PoolManager.GetShotgunProjectile();
                     Physics.IgnoreCollision(coll, shotgunProj.GetComponent<Collider>());
@@ -106,6 +106,11 @@ public class PlayerController : MonoBehaviour, IDamagable
                 }
                 break;
             case Weapon.Basooka:
+                var basookaProj = PoolManager.GetBasookaProjectile();
+                Physics.IgnoreCollision(coll, basookaProj.GetComponent<Collider>());
+                basookaProj.gameObject.SetActive(true);
+                basookaProj.transform.position = shootPos.position;
+                basookaProj.Initialize(target.position, model.projSpeed);
                 break;
             default:
                 break;

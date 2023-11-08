@@ -7,7 +7,6 @@ namespace Enemies
     {
         private NavMeshAgent agent;
         private Vector3 target;
-        private float timer = 0f;
 
         protected void OnEnable()
         {

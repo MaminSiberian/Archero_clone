@@ -5928,6 +5928,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flyer (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2923417997481679853, guid: c6ea08f9e555f7944af0d23301bea8fb, type: 3}
+      propertyPath: m_Constraints
+      value: 84
+      objectReference: {fileID: 0}
     - target: {fileID: 2923417997481679855, guid: c6ea08f9e555f7944af0d23301bea8fb, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -18951,6 +18955,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 492453005855790180, guid: 7fb069cf8548ee24faa02f2fcc3ac7fe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332478266136811006, guid: 7fb069cf8548ee24faa02f2fcc3ac7fe, type: 3}
+      propertyPath: _weapon
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3796113417992279763, guid: 7fb069cf8548ee24faa02f2fcc3ac7fe, type: 3}

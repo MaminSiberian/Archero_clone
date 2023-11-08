@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Explosion : MonoBehaviour
 {
-    private float damage = 1;
+    private float damage = 2;
 
     private void Awake()
     {

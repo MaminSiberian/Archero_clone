@@ -32,7 +32,7 @@ public class ShotgunProjectile : MonoBehaviour
             (target.x + Random.Range(-deviation, deviation),
             target.y,
             target.z + Random.Range(-deviation, deviation));
-        rb.AddForce((newTarget - transform.position).normalized * force * 25);
+        rb.AddForce((newTarget - transform.position).normalized * force * 20);
     }
     private void Deactivate()
     {
