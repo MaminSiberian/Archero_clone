@@ -15,6 +15,6 @@ public class MainCamController : MonoBehaviour
     private void Start()
     {
         config = FindObjectOfType<LevelConfig>();
-        cam.fieldOfView = config.arenaSize.x * 7;
+        cam.fieldOfView = config.arenaSize.x * fowCoeff;
     }
 }

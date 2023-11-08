@@ -19,8 +19,6 @@ namespace Enemies
         protected void OnEnable()
         {
             OnEnemySpawned(this);
-            transform.position = new Vector3(transform.position.x, altitude, transform.position.z);
-            target = transform.position;
         }
         protected void OnDisable()
         {
@@ -35,6 +33,8 @@ namespace Enemies
         {
             base.Start();
             OnEnemySpawned(this);
+            transform.position = new Vector3(transform.position.x, altitude, transform.position.z);
+            target = transform.position;
         }
         private void Update()
         {

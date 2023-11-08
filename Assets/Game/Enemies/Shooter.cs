@@ -20,7 +20,6 @@ namespace Enemies
         protected void OnEnable()
         {
             OnEnemySpawned(this);
-            target = transform.position;
         }
         protected void OnDisable()
         {
@@ -36,6 +35,7 @@ namespace Enemies
         {
             base.Start();
             OnEnemySpawned(this);
+            target = transform.position;
         }
         private void Update()
         {
