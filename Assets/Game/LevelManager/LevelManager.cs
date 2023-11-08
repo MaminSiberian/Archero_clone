@@ -1,7 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -23,5 +22,14 @@ public class LevelManager : MonoBehaviour
         coinsValue++;
 
         OnCoinValueChangedEvent?.Invoke(coinsValue);
+    }
+    public void LoadNextLevel()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

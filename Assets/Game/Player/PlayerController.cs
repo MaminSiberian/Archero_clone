@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     public static event Action<float> OnPlayerHealthChangedEvent;
     public static event Action OnPlayerDeathEvent;
+    public static event Action OnEnemiesDefeatedEvent;
 
     private Rigidbody rb;
     private Collider coll;
@@ -156,6 +157,10 @@ public class PlayerController : MonoBehaviour
     private void RemoveEnemy(EnemyBase enemy)
     {
         enemiesOnLevel.Remove(enemy);
+        if (enemiesOnLevel.Count <= 0)
+        {
+            OnEnemiesDefeatedEvent?.Invoke();
+        }
     }
     #endregion
 }
