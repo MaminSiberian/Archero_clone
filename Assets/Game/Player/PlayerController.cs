@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour, IDamagable
     private Collider coll;
     private PlayerModel model;
     private InputManager input;
-    private PlayerManager manager;
 
     private Vector2 inputSpeed;
     private float currentHP;
@@ -50,7 +49,6 @@ public class PlayerController : MonoBehaviour, IDamagable
     private void Start()
     {
         input = FindObjectOfType<InputManager>();
-        manager = FindObjectOfType<PlayerManager>();
     }
     private void Update()
     {
@@ -86,14 +84,14 @@ public class PlayerController : MonoBehaviour, IDamagable
     {
         if (target == null) return;
 
-        switch (manager.weapon)
+        switch (model.weapon.name)
         {
             case Weapon.Pistol:
                 var pistolProj = PoolManager.GetPistolProjectile();
                 Physics.IgnoreCollision(coll, pistolProj.GetComponent<Collider>());
                 pistolProj.gameObject.SetActive(true);
                 pistolProj.transform.position = shootPos.position;
-                pistolProj.Initialize(target, model.projSpeed, model.damage);
+                pistolProj.Initialize(target, model.weapon.force, model.weapon.damage);
                 break;
             case Weapon.Shotgun:
                 for (int i = 0; i < 4; i++)
@@ -102,7 +100,7 @@ public class PlayerController : MonoBehaviour, IDamagable
                     Physics.IgnoreCollision(coll, shotgunProj.GetComponent<Collider>());
                     shotgunProj.gameObject.SetActive(true);
                     shotgunProj.transform.position = shootPos.position;
-                    shotgunProj.Initialize(target.position, model.projSpeed, model.damage);
+                    shotgunProj.Initialize(target.position, model.weapon.force, model.weapon.damage);
                 }
                 break;
             case Weapon.Basooka:
@@ -110,7 +108,7 @@ public class PlayerController : MonoBehaviour, IDamagable
                 Physics.IgnoreCollision(coll, basookaProj.GetComponent<Collider>());
                 basookaProj.gameObject.SetActive(true);
                 basookaProj.transform.position = shootPos.position;
-                basookaProj.Initialize(target.position, model.projSpeed);
+                basookaProj.Initialize(target.position, model.weapon.force);
                 break;
             default:
                 break;
@@ -120,9 +118,9 @@ public class PlayerController : MonoBehaviour, IDamagable
     }
     private void Reload()
     {
-        if (timer >= model.reloadTime)
+        if (timer >= model.weapon.reloadingTime)
         {
-            timer -= model.reloadTime;
+            timer -= model.weapon.reloadingTime;
             readyToFire = true;
         }
         else

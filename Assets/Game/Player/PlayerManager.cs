@@ -1,17 +1,9 @@
 using UnityEngine;
 
-public enum Weapon
-{
-    Pistol,
-    Shotgun,
-    Basooka
-}
-
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] private Weapon _weapon;
+    public static WeaponBase weapon { get; private set; }
 
-    public Weapon weapon => _weapon;
     public static PlayerManager instance { get; private set; }
 
     private void Awake()
@@ -25,9 +17,11 @@ public class PlayerManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+
+        if (weapon == null) weapon = new Pistol();
     }
-    public void ChangeWeapon(Weapon weapon)
+    public void ChangeWeapon(WeaponBase _weapon)
     {
-        this._weapon = weapon;
+        weapon = _weapon;
     }
 }

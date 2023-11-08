@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
 
     public Vector2 speed {  get; private set; }
     private Joystick joystick;
-
+    
     private void Start()
     {
         if (inputType == InputType.Touch) joystick = FindObjectOfType<Joystick>();
