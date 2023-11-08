@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour
     }
     public void LoadNextLevel()
     {
-        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings)
+        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
         {
             SceneManager.LoadScene("MainMenu");
         }
