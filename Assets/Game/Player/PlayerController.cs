@@ -5,7 +5,7 @@ using Enemies;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider)), RequireComponent(typeof(PlayerModel))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamagable
 {
     [SerializeField] private Transform shootPos;
     [SerializeField] private LayerMask wallsLayer;

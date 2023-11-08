@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Enemies
 {
     [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider))]
-    public abstract class EnemyBase : MonoBehaviour
+    public abstract class EnemyBase : MonoBehaviour, IDamagable
     {
         [SerializeField] protected float moveSpeed;
         [SerializeField] protected int maxHP;
@@ -39,7 +39,7 @@ namespace Enemies
                 player.GetDamage(damage);
             }
         }
-        public void GetDamage(float value)
+        public virtual void GetDamage(float value)
         {
             currentHP -= value;
 
@@ -48,7 +48,7 @@ namespace Enemies
                 KillEnemy();
             }
         }
-        protected void KillEnemy()
+        protected virtual void KillEnemy()
         {
             var coin = PoolManager.GetCoin();
             coin.gameObject.SetActive(true);

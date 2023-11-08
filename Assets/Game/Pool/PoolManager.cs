@@ -8,11 +8,13 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private EnemyProjectile enemyProjPrefab;
     [SerializeField] private Destructor deathEffectPrefab;
     [SerializeField] private Coin coinPrefab;
+    [SerializeField] private Explosion explosionPrefab;
 
     private static Pool<PlayerProjectile> playerPool;
     private static Pool<EnemyProjectile> enemyPool;
     private static Pool<Destructor> deathEffectPool;
     private static Pool<Coin> coinPool;
+    public static Pool<Explosion> explosionPool;
 
     private void Start()
     {
@@ -20,6 +22,7 @@ public class PoolManager : MonoBehaviour
         enemyPool = new Pool<EnemyProjectile>(enemyProjPrefab, poolCount, transform);
         deathEffectPool = new Pool<Destructor>(deathEffectPrefab, poolCount, transform);
         coinPool = new Pool<Coin>(coinPrefab, poolCount, transform);
+        explosionPool = new Pool<Explosion>(explosionPrefab, poolCount, transform);
     }
 
     public static PlayerProjectile GetPlayerProjectile()
@@ -37,5 +40,9 @@ public class PoolManager : MonoBehaviour
     public static Coin GetCoin()
     {
         return coinPool.GetObject();
+    }
+    public static Explosion GetExplosion()
+    {
+        return explosionPool.GetObject();
     }
 }
