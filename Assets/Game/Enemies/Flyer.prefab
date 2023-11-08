@@ -140,7 +140,7 @@ MonoBehaviour:
   altitude: 3.5
   reloadTime: 1.2
   shootingRange: 8
-  force: 750
+  force: 600
   shootPos: {fileID: 2048302918498000852}
 --- !u!136 &2923417997481679852
 CapsuleCollider:
