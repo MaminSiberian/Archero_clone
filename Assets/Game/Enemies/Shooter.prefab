@@ -253,9 +253,9 @@ MonoBehaviour:
   wallsLayer:
     serializedVersion: 2
     m_Bits: 64
-  reloadTime: 1.2
+  reloadTime: 1.5
   shootingRange: 15
-  force: 600
+  force: 500
   shootPos: {fileID: 6192238151719254284}
 --- !u!136 &6994132287982009652
 CapsuleCollider:

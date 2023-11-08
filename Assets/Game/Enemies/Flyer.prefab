@@ -138,9 +138,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   altitude: 3.5
-  reloadTime: 1.2
+  reloadTime: 1.4
   shootingRange: 8
-  force: 600
+  force: 500
   shootPos: {fileID: 2048302918498000852}
 --- !u!136 &2923417997481679852
 CapsuleCollider:

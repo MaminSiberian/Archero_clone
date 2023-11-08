@@ -132,8 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d72fcc7dbe617224eb3f2fe76776a006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  maxHP: 20
+  moveSpeed: 2
+  maxHP: 4
   damage: 1
   wallsLayer:
     serializedVersion: 2

@@ -6,7 +6,7 @@ public class MainCamController : MonoBehaviour
     private Camera cam;
     private LevelConfig config;
 
-    private const float fowCoeff = 7;
+    private const float fowCoeff = 6.5f;
 
     private void Awake()
     {
